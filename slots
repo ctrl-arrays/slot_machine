@@ -1,0 +1,48 @@
+import tkinter as tk
+import random
+# SLot symbols
+symbols = [
+    '\U0001F352',
+    '\U0001F34B',
+    '\U0001F514',
+    '\U0001F48E',
+    '\U00000037'
+]
+# Spin function
+def spin():
+    slot1 = random.choice(symbols)
+    slot2 = random.choice(symbols)
+    slot3 = random.choice(symbols)
+
+    label1.config(text=slot1)
+    label2.config(text=slot2)
+    label3.config(text=slot3)
+
+    if slot1 == slot2 == slot3:
+        result_label.config(text="JACKPOT!!!", fg="cyan")
+    elif slot1 == slot2 or slot2 == slot3 or slot1 == slot3:
+        result_label.config(text="Nice, two matched.", fg="cyan")
+    else:
+        result_label.config(text="Try again.", fg="cyan")
+
+# Main window setup
+root = tk.Tk()
+root.title("Slot Machine")
+root.geometry("300x200")
+root.configure(bg="black")
+# Slot labels
+label1 = tk.Label(root, text='?', font=('Helvetica', 32), fg="cyan", bg="black")
+label2 = tk.Label(root, text='?', font=('Helvetica', 32), fg="cyan", bg="black")
+label3 = tk.Label(root, text='?', font=('Helvetica', 32), fg="cyan", bg="black")
+
+label1.pack(side='left', expand=True)
+label2.pack(side='left', expand=True)
+label3.pack(side='left', expand=True)
+# Spin button
+spin_button = tk.Button(root, text="Spin", command=spin, font=('Helvetica', 14), fg="black", bg="cyan")
+spin_button.pack(pady=10)
+# Result label
+result_label = tk.Label(root, text="", font=('Helvetica', 14), fg="cyan", bg="black")
+result_label.pack()
+# Run app
+root.mainloop()
